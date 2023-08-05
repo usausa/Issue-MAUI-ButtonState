@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ButtonState.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttonState="clr-namespace:ButtonState">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="WithVsmButton" TargetType="Button">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Blue100Accent}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Gray200}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style x:Key="WithoutVsmButton" TargetType="Button">
+                <Setter Property="FontSize" Value="24" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <buttonState:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout
+        Padding="30,0"
+        Spacing="25"
+        VerticalOptions="Center">
+
+        <Button
+            Command="{Binding OnCommand}"
+            Style="{StaticResource WithVsmButton}"
+            Text="ON with VSM" />
+        <Button
+            Command="{Binding OffCommand}"
+            Style="{StaticResource WithVsmButton}"
+            Text="OFF with VSM" />
+
+        <Button
+            Command="{Binding OnCommand}"
+            Style="{StaticResource WithoutVsmButton}"
+            Text="ON without VSM" />
+        <Button
+            Command="{Binding OffCommand}"
+            Style="{StaticResource WithoutVsmButton}"
+            Text="OFF without VSM" />
+
+    </VerticalStackLayout>
+
+</ContentPage>
